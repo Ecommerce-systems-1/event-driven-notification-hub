@@ -30,6 +30,10 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 app.include_router(events.router)
 app.include_router(notifications.router)
 
-static_dir = os.path.join(os.path.dirname(__file__), "..", "..", "frontend", "out")
+@app.get("/health")
+def health():
+    return {"status": "ok"}
+
+static_dir = "/app/frontend/out"
 if os.path.exists(static_dir):
     app.mount("/", StaticFiles(directory=static_dir, html=True), name="static")

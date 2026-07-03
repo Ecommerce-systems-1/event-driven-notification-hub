@@ -68,7 +68,7 @@ def test_notification_deduplication(client):
     # Re-process same event manually via processor
     from app.processor import _process
     import asyncio
-    asyncio.get_event_loop().run_until_complete(_process({
+    asyncio.run(_process({
         "id": event_id, "event_type": "ORDER_PLACED",
         "customer_id": "C3", "payload": {"order_id": "O3"}
     }))
